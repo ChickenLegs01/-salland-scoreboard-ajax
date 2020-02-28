@@ -1,0 +1,14 @@
+/bin/
+/_backup/
+/AltSerialLibs/
+/build/
+/dist/
+/docs/
+/ecbuild/
+/.settings
+/target/
+/simple/
+/stuff/
+/test/
+.classpath
+.project 

@@ -1,0 +1,172 @@
+<html>
+<head>
+<title>Salland Score board UI</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/my.css" />
+<style type="text/css">
+	#example {background-color: white; padding: 10px}
+	#example input {width: 100px}
+	#example table.grid {border-collapse: separate;border-spacing: 0px;}
+	#example table.grid td {background-color: #abc; padding: 3px 5px; text-align: left}
+</style>
+
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/app-ajax-score.js"></script>
+
+<script type="text/javascript">
+	jQuery().ready(function($) {
+		<!-- line 1 -->
+		$('#spinnerTotal').spinner();
+		$('#spinnerBatter1').spinner();
+		$('#spinnerBatter2').spinner();
+		<!-- line 2 -->
+		$('#spinnerRuns1').spinner();
+		$('#spinnerRuns2').spinner();
+		$('#spinnerWickets').spinner();
+		<!-- line 3 -->
+		$('#spinnerBowler1').spinner();
+		$('#spinnerLastWicket').spinner();
+		$('#spinnerLastman').spinner();
+		<!-- line 4 -->
+		$('#spinnerBowler2').spinner();
+		$('#spinnerPrevInnings').spinner();
+		$('#spinnerRR').spinner();
+		<!-- line 5 -->
+		$('#spinnerOversBowled').spinner();
+		$('#spinnerDL').spinner();
+		$('#spinnerOversRemaining').spinner();
+		
+		<!-- $('#spinnermousewheel').change(function() {$('#spinnerconfig').spinner('option', 'mouseWheel', $(this).is(':checked'));});  -->
+		<!-- $('#enable').click(function() { $('#spinnerdisable').spinner('enable'); }); -->
+		<!-- $('#disable').click(function() { $('#spinnerdisable').spinner('disable'); }); -->
+		$('#GetValue').click(function() { alert($('#spinner').spinner('value')); });
+		$('#destroy').click(function() { $('#spinner').spinner('destroy'); });
+		<!-- $("#switcher").themeswitcher(); -->
+	});
+</script>
+
+</head>
+<body>
+
+<div id="example">
+<div id="switcher"></div>
+<script>
+
+// this function is called when you press the calculate button.
+function myFunction() {
+
+	var totalRuns = parseFloat(document.getElementById("spinnerTotal").value);
+	var previousInningsRuns = parseFloat(document.getElementById("spinnerPrevInnings").value);
+	var oversRemaining = parseFloat(document.getElementById("spinnerOversRemaining").value);
+
+	if( oversRemaining > 0 && previousInningsRuns > 0 ) {
+		var rr = (previousInningsRuns - totalRuns) / oversRemaining;
+		rr = Math.round(rr);
+		document.getElementById("spinnerRR").value = rr;
+	}
+}
+
+</script>
+
+<form method=POST action="#" id="scoreForm">
+<table border="0" cellspacing="0" cellpadding="0">
+
+<tr>
+<td colspan="4" align="center"><p style="font-size:30px">Salland Score board</td>
+</tr>
+
+<tr>
+<td>
+<table class="grid"> 
+	<tr>
+		<td>Batsman</td>
+		<td><input type="number" id="spinnerBatter1" name="batter1" value="1" min="1" max="11" style="width: 60px" /></td>
+	</tr>
+	<tr>
+		<td>Runs</td>
+		<td><input type="number" id="spinnerRuns1" name="runs1" value="0" min="0" max="999" style="width: 60px" /></td>
+	</tr>
+	<tr>
+		<td>Bowler</td>
+		<td><input type="number" id="spinnerBowler1" name="bowler1" value="0" min="0" max="11" style="width: 60px" /></td>
+	</tr>
+	<tr>
+		<td>Bowler</td>
+		<td><input type="number" id="spinnerBowler2" name="bowler2" value="0" min="0" max="11" style="width: 60px" /></td>
+	</tr>
+	<tr>
+		<td>Overs Bowled</td>
+		<td><input type="number" id="spinnerOversBowled" name="oversBowled" value="0" min="0" max="99" style="width: 60px" /></td>
+	</tr>
+</table>
+</td>
+<td>
+<table class="grid"> 
+	<tr>
+		<td>Total</td>
+		<td><input type="number" id="spinnerTotal" name="total" value="0" min="0" max="999" style="width: 60px" /></td>
+	</tr>
+	<tr>
+		<td >Wickets</td>
+		<td ><input type="number" id="spinnerWickets" name="wickets" value="0" min="0" max="11" style="width: 60px" /></td>
+	</tr>
+	<tr>
+		<td>Last Wicket</td>
+		<td><input type="number" id="spinnerLastWicket" name="lastWicket" value="0" min="0" max="999" style="width: 60px" /></td>
+	</tr>
+	<tr>
+	<td>Previous Inning</td>
+	<td><input type="number" id="spinnerPrevInnings" name="prevInnings" value="0" min="0" max="999" style="width: 60px" /></td>
+	</tr>
+	<tr>
+	<td>D/L Parscore</td>
+	<td><input type="number" id="spinnerDL" name="DL" value="0" min="0" max="999" style="width: 60px" /></td>
+	</tr>
+	</table>
+</td>
+
+<td>
+<table class="grid"> 
+	<tr>
+		<td>Batsman</td>
+		<td><input type="number" id="spinnerBatter2" name="batter2" value="2" min="1" max="11" style="width: 60px" /></td>
+	</tr>
+	<tr>
+	<td>Runs</td>
+	<td><input type="number" id="spinnerRuns2" name="runs2" value="0" min="0" max="999" style="width: 60px" /></td>
+	</tr>
+	<tr>
+	<td>Lastman</td>
+	<td><input type="number" id="spinnerLastman" name="lastman" value="0" min="0" max="999" style="width: 60px" /></td>
+	</tr>
+	<tr>
+	<td>Required Runrate</td>
+	<td><input type="number" id="spinnerRR" name="RR" value="0" min="0" max="99" style="width: 60px" /></td>
+	</tr>
+	<tr>
+	<td>Overs Remaining</td>
+	<td><input type="number" id="spinnerOversRemaining" name="oversRemaining" value="0" min="0" max="99" style="width: 60px" /></td>
+	</tr>
+</table>
+</td>
+<td><input type="submit" value="Send score&#x00A;[alt s]" style="font-size: 20pt; width:150px; height:135px" accesskey="s"></td> 
+</tr>
+
+</table>
+
+</form>
+
+<br>
+<button onclick="myFunction()" accesskey="r">Calc RR [alt r]</button>
+
+<div id="ajaxSendScoreServletResponse"></div>
+<br>
+<br>
+<a href="sendtext.html" target="_blank">Send text</a>
+</div>
+
+<!-- Powered by Funkychickenlegs -->
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+    <display-name>Salland Scoreboard</display-name>
+    <description>This is version 2 of my scoreboard</description>
+
+    <servlet>
+        <servlet-name>ScoreServ</servlet-name>
+        <servlet-class>nl.salland.scoreboard.ScoreServlet</servlet-class>
+        <init-param>
+          <param-name>disableComm</param-name>
+          <param-value>false</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>TextServ</servlet-name>
+        <servlet-class>nl.salland.scoreboard.TextServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ScoreServ</servlet-name>
+        <url-pattern>/score</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TextServ</servlet-name>
+        <url-pattern>/text</url-pattern>
+    </servlet-mapping>
+    
+    <listener>
+		<listener-class>nl.salland.scoreboard.ScoreboardConfigListener</listener-class>
+	</listener>
+
+	<welcome-file-list>
+	   <welcome-file>scoreboard.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

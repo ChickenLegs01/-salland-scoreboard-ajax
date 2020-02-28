@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Salland Score board TextUI</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/my.css" />
+<script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script src="js/app-ajax-text.js" type="text/javascript"></script>
+
+<style type="text/css">
+	#example {background-color: white; padding: 10px}
+	#example input {width: 100px; font-size: 30pt; font-family: 'Courier New', monospace;}
+	#example table.grid {border-collapse: separate;	border-spacing: 0px;}
+	#example table.grid td {background-color: #abc; padding: 3px 5px; text-align: left; font-size: 30pt}
+</style>
+
+</head>
+
+<body>
+<div id="example">
+<form method="POST" action="#" id="textForm">
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr>
+	<td><p style="font-size:50px">Send text to scoreboard</td>
+</tr>
+
+<tr><td>
+	<table class="grid" border="0"> 
+		<tr>
+			<td>Line1:</td>
+			<td><input type="text" name="line1" maxlength="10" style="width: 250px" /></td>
+		</tr>
+		<tr>
+			<td>Line2:</td>
+			<td><input type="text" name="line2" maxlength="10" style="width: 250px" /></td>
+		</tr>
+		<tr>
+			<td>Line3:</td>
+			<td><input type="text" name="line3" maxlength="10" style="width: 250px" /></td>
+		</tr>
+		<tr>
+			<td>Line4:</td>
+			<td><input type="text" name="line4" maxlength="10" style="width: 250px" /></td>
+		</tr>
+		<tr>
+			<td>Line5:</td>
+			<td><input type="text" name="line5" maxlength="10" style="width: 250px" /></td>
+		</tr>
+	</table> 
+</td></tr>
+</table>
+
+<table border="0" width="355px">
+<tr>
+	<td align="right"><input type="submit" value="Send text" style="font-size: 20pt; width:200px" /></td> 
+</tr>
+</table>
+</form>
+
+<div id="ajaxSendTextServletResponse"></div>
+</div>
+<!-- Powered by Funkychickenlegs -->
+</body>
+</html>
